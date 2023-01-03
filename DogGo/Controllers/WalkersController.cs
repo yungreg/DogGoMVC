@@ -25,11 +25,19 @@ namespace DogGo.Controllers
 
             return View(walkers);
         }
+        // replaced old template code on line 30
 
-        // GET: WalkersController/Details/5
+        // GET: Walkers/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Walker walker = _walkerRepo.GetWalkerById(id);
+
+            if (walker == null)
+            {
+                return NotFound();
+            }
+
+            return View(walker);
         }
 
         // GET: WalkersController/Create
