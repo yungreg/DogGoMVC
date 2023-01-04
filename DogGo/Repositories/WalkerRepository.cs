@@ -1,4 +1,5 @@
 ﻿using DogGo.Models;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
@@ -31,10 +32,11 @@ namespace DogGo.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, [Name], ImageUrl, NeighborhoodId
-                        FROM Walker
-                    ";
-
+                      
+                    SELECT n.Id, N.Name, w.Name FROM Neighborhood N                       
+                    Right join Walker W on W.NeighborhoodId = N.Id ;
+                    "; // INCLUDE TEH NEIGHBOPRHOOD TABLE IN The join to get the nbame propertry
+                    
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         List<Walker> walkers = new List<Walker>();
@@ -45,7 +47,13 @@ namespace DogGo.Repositories
                                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                                 Name = reader.GetString(reader.GetOrdinal("Name")),
                                 ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
-                                NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
+                                Neighborhood = new Neighborhood()
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("N.Id")),
+                                    Name = reader.GetString(reader.GetOrdinal("N.Name"))
+
+                                } 
+                                //make an object inside teh neighborhood model to give it name an idd 
                             };
 
                             walkers.Add(walker);

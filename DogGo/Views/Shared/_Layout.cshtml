@@ -16,6 +16,18 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <style>
+                    body {
+                        background-color: darkolivegreen;
+                    }
+
+                    h1 {
+                        color: goldenrod;
+                        margin-left: 40px;
+                    }
+                    
+                    
+                </style>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
@@ -23,6 +35,12 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="" class="nav-link text-dark" asp-area="" asp-controller="Walkers" asp-action="Index">Walkers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Owners" asp-action="Index">Owners</a>
                         </li>
                     </ul>
                 </div>
