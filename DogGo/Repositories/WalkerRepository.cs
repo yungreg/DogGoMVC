@@ -32,10 +32,11 @@ namespace DogGo.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                      
-                    SELECT n.Id, N.Name, w.Name FROM Neighborhood N                       
+                    
+                    SELECT W.Id as WalkerId, W.Name as WalkerName, W.ImageUrl, N.Name as PlaceName, w.NeighborhoodId
+                    FROM Neighborhood N                       
                     Right join Walker W on W.NeighborhoodId = N.Id ;
-                    "; // INCLUDE TEH NEIGHBOPRHOOD TABLE IN The join to get the nbame propertry
+                    "; // make sure to pull in everything from both tables so the compiler can access ti at runtue 
                     
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -44,16 +45,16 @@ namespace DogGo.Repositories
                         {
                             Walker walker = new Walker
                             {
-                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                Name = reader.GetString(reader.GetOrdinal("Name")),
+                                Id = reader.GetInt32(reader.GetOrdinal("WalkerId")),
+                                Name = reader.GetString(reader.GetOrdinal("WalkerName")),
                                 ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
                                 Neighborhood = new Neighborhood()
                                 {
-                                    Id = reader.GetInt32(reader.GetOrdinal("N.Id")),
-                                    Name = reader.GetString(reader.GetOrdinal("N.Name"))
+                                    Id = reader.GetInt32(reader.GetOrdinal("NeighborhoodId")),
+                                    Name = reader.GetString(reader.GetOrdinal("PlaceName"))
 
                                 } 
-                                //make an object inside teh neighborhood model to give it name an idd 
+                              
                             };
 
                             walkers.Add(walker);

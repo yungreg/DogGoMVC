@@ -6,7 +6,16 @@ namespace DogGo.Repositories
 {
     public interface IOwnerRepository
     {
+        // update to include AddOwner, UpdateOwner and DeleteOwner methods.
         List<Owner> GetAllOwners();
         Owner GetOwnerById(int id);
+        //could this be a variable instead of a list?
+        Owner AddOwner(Owner owner);
+ 
+        Owner UpdateOwner(Owner owner);
+
+        Owner DeleteOwner(int id);
+
     }
+
 }

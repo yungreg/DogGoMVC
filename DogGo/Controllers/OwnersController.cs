@@ -34,11 +34,12 @@ namespace DogGo.Controllers
 
             return View(owner);
         }
-
+        // this is wher ethe add goes 
         // GET: OwnersController/Create
-        public ActionResult Create()
+        public ActionResult Create(Owner owner)
         {
-            return View();
+            Owner singleOwner = _ownerRepository.AddOwner(owner);
+            return View(singleOwner);
         }
 
         // POST: OwnersController/Create
@@ -57,6 +58,7 @@ namespace DogGo.Controllers
         }
 
         // GET: OwnersController/Edit/5
+        // this wil be update owner
         public ActionResult Edit(int id)
         {
             return View();
@@ -77,6 +79,7 @@ namespace DogGo.Controllers
             }
         }
 
+        //these will be delete 
         // GET: OwnersController/Delete/5
         public ActionResult Delete(int id)
         {

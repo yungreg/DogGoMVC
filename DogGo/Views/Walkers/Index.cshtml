@@ -22,9 +22,6 @@
                 @Html.DisplayNameFor(model => model.ImageUrl)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Neighborhood.Id)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Neighborhood.Name)
             </th>
             <th></th>
@@ -40,11 +37,12 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NeighborhoodId)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.ImageUrl)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Neighborhood.Name)
+            </td>
+           
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.Id })|
                     @Html.ActionLink("Details", "Details", new { id=item.Id }) |
