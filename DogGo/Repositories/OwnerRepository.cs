@@ -48,7 +48,6 @@ namespace DogGo.Repositories
                                 Address = reader.GetString(reader.GetOrdinal("Address")),
                                 NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId")),
                                 Phone = reader.GetString(reader.GetOrdinal("Phone")),
-
                             };
 
                             owners.Add(owner);
@@ -155,14 +154,13 @@ namespace DogGo.Repositories
                     cmd.Parameters.AddWithValue("@phoneNumber", owner.Phone);
                     cmd.Parameters.AddWithValue("@address", owner.Address);
                     cmd.Parameters.AddWithValue("@neighborhoodId", owner.NeighborhoodId);
+           
 
                     int id = (int)cmd.ExecuteScalar();
 
                     owner.Id = id;
 
                 }
-     
-
                 
             }
         }

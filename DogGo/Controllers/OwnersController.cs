@@ -35,14 +35,14 @@ namespace DogGo.Controllers
 
             return View(owner);
         }
-        // this is wher ethe add goe 
+        
         // GET: OwnersController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: OwnersController/Create
+        // POST: Owners/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Owner owner)
@@ -55,7 +55,7 @@ namespace DogGo.Controllers
             }
             catch (Exception ex)
             {
-                return View(ex);
+                return View(owner);
             }
         }
 
