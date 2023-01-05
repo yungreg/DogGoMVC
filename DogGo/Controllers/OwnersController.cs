@@ -59,25 +59,34 @@ namespace DogGo.Controllers
             }
         }
 
-        // GET: OwnersController/Edit/5
-        // this wil be update owner
+        // these will update the owner info
+        // GET: Owners/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Owner owner = _ownerRepository.GetOwnerById(id);
+
+            if (owner == null)
+            {
+                return NotFound();
+            }
+
+            return View(owner);
         }
 
-        // POST: OwnersController/Edit/5
+        /// POST: Owners/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Owner owner)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _ownerRepository.UpdateOwner(owner);
+
+                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return View(owner);
             }
         }
 
@@ -104,7 +113,7 @@ namespace DogGo.Controllers
             }
             catch (Exception ex)
             {
-                return View(ex);
+                return View(owner);
             }
         }
     }

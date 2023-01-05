@@ -12,7 +12,7 @@ namespace DogGo.Repositories
         //could this be a variable instead of a list?
         public void AddOwner(Owner owner);
  
-        //Owner UpdateOwner(Owner owner);
+        public void UpdateOwner(Owner owner);
 
         public void DeleteOwner(int id);
 
