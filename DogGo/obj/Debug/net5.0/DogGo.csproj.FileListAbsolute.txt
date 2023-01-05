@@ -428,3 +428,5 @@ C:\Users\rlumr\workspace\csharp\book-2-MVC\DogGo\DogGo\obj\Debug\net5.0\DogGo.ge
 C:\Users\rlumr\workspace\csharp\book-2-MVC\DogGo\DogGo\obj\Debug\net5.0\ref\DogGo.dll
 C:\Users\rlumr\workspace\csharp\book-2-MVC\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Walkers\Index.cshtml.g.cs
 C:\Users\rlumr\workspace\csharp\book-2-MVC\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Walkers\Details.cshtml.g.cs
+C:\Users\rlumr\workspace\csharp\book-2-MVC\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Owners\Create.cshtml.g.cs
+C:\Users\rlumr\workspace\csharp\book-2-MVC\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Owners\Index.cshtml.g.cs

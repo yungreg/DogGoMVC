@@ -2,13 +2,14 @@
 using DogGo.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace DogGo.Controllers
 {
     public class OwnersController : Controller
     {
-        //impoement details & index methods
+        //imporment details & index methods
         private readonly IOwnerRepository _ownerRepository;
 
         public OwnersController(IOwnerRepository ownerRepository)
@@ -34,26 +35,27 @@ namespace DogGo.Controllers
 
             return View(owner);
         }
-        // this is wher ethe add goes 
+        // this is wher ethe add goe 
         // GET: OwnersController/Create
-        public ActionResult Create(Owner owner)
+        public ActionResult Create()
         {
-            Owner singleOwner = _ownerRepository.AddOwner(owner);
-            return View(singleOwner);
+            return View();
         }
 
         // POST: OwnersController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Owner owner)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _ownerRepository.AddOwner(owner);
+
+                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return View(ex);
             }
         }
 

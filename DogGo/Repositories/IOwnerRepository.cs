@@ -10,11 +10,11 @@ namespace DogGo.Repositories
         List<Owner> GetAllOwners();
         Owner GetOwnerById(int id);
         //could this be a variable instead of a list?
-        Owner AddOwner(Owner owner);
+        public void AddOwner(Owner owner);
  
-        Owner UpdateOwner(Owner owner);
+        //Owner UpdateOwner(Owner owner);
 
-        Owner DeleteOwner(int id);
+        //Owner DeleteOwner(int id);
 
     }
 
