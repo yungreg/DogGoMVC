@@ -89,13 +89,19 @@ namespace DogGo.Controllers
         public ActionResult Edit(int id)
         {
             Owner owner = _ownerRepository.GetOwnerById(id);
+            List<Dog> dogs = _dogRepository.GetDogsByOwnerId(owner.Id);
+            List<Walker> walkers = _walkerRepository.GetWalkersInNeighborhood(owner.NeighborhoodId);
+            List<Neighborhood> neighborhoods = _neighborhoodRepository.GetAll();
 
-            if (owner == null)
+            OwnerFormViewModel vm = new OwnerFormViewModel()
             {
-                return NotFound();
-            }
+                Owner = owner,
+                Dogs = dogs,
+                Walkers = walkers,
+                Neighborhoods = neighborhoods
+            };
 
-            return View(owner);
+            return View(vm);
         }
 
         /// POST: Owners/Edit/5
@@ -105,14 +111,14 @@ namespace DogGo.Controllers
         {
             try
             {
-                _ownerRepository.UpdateOwner(owner);
+                _ownerRepository.AddOwner(owner);
 
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return View(owner);
-            }
+            }   
         }
 
         //these will be delete 
