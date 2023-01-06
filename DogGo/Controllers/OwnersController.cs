@@ -14,15 +14,18 @@ namespace DogGo.Controllers
         private readonly IOwnerRepository _ownerRepository;
         private readonly IDogRepository _dogRepository;
         private readonly IWalkerRepository _walkerRepository;
+        private readonly INeighborhoodRepository _neighborhoodRepository;
 
 
         public OwnersController(IOwnerRepository ownerRepository,
             IDogRepository dogRepository,
-            IWalkerRepository walkerRepository)
+            IWalkerRepository walkerRepository,
+            INeighborhoodRepository neighborhoodRepository)
         {
             _ownerRepository = ownerRepository;
             _dogRepository = dogRepository;
             _walkerRepository = walkerRepository;
+            _neighborhoodRepository = neighborhoodRepository;
         }
         // GET: OwnersController
         public ActionResult Index()
@@ -47,12 +50,22 @@ namespace DogGo.Controllers
 
             return View(vm);
         }
-        
-        // GET: OwnersController/Create
+
+        //oh DUH.. vvv this is teh URL the action will take teh user to. lol 
+        // GET: Owners/Create
         public ActionResult Create()
         {
-            return View();
+            List<Neighborhood> neighborhoods = _neighborhoodRepository.GetAll();
+
+            OwnerFormViewModel vm = new OwnerFormViewModel()
+            {
+                Owner = new Owner(),
+                Neighborhoods = neighborhoods
+            };
+
+            return View(vm);
         }
+
 
         // POST: Owners/Create
         [HttpPost]
