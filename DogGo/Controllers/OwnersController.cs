@@ -1,4 +1,5 @@
 ﻿using DogGo.Models;
+using DogGo.Models.ViewModels;
 using DogGo.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,17 @@ namespace DogGo.Controllers
     {
         //imporment details & index methods
         private readonly IOwnerRepository _ownerRepository;
+        private readonly IDogRepository _dogRepository;
+        private readonly IWalkerRepository _walkerRepository;
 
-        public OwnersController(IOwnerRepository ownerRepository)
+
+        public OwnersController(IOwnerRepository ownerRepository,
+            IDogRepository dogRepository,
+            IWalkerRepository walkerRepository)
         {
             _ownerRepository = ownerRepository;
+            _dogRepository = dogRepository;
+            _walkerRepository = walkerRepository;
         }
         // GET: OwnersController
         public ActionResult Index()
@@ -27,13 +35,17 @@ namespace DogGo.Controllers
         public ActionResult Details(int id)
         {
             Owner owner = _ownerRepository.GetOwnerById(id);
+            List<Dog> dogs = _dogRepository.GetDogsByOwnerId(owner.Id);
+            List<Walker> walkers = _walkerRepository.GetWalkersInNeighborhood(owner.NeighborhoodId);
 
-            if (owner == null)
+            ProfileViewModel vm = new ProfileViewModel()
             {
-                return NotFound();
-            }
+                Owner = owner,
+                Dogs = dogs,
+                Walkers = walkers
+            };
 
-            return View(owner);
+            return View(vm);
         }
         
         // GET: OwnersController/Create
